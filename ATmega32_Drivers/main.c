@@ -11,7 +11,6 @@
 #include "GPIO.h"
 #include "lcd.h"
 
-
 GPIO_init()
 {
 	GPIO_PinConfig_t PinConfig;
@@ -55,12 +54,12 @@ GPIO_init()
 	// Configure PIN1 as Output(push-pull)
 	PinConfig.GPIO_PinNumber = GPIO_PIN_1;
 	PinConfig.GPIO_PinMode = GPIO_MODE_OUTPUT_PP;
-	MCAL_GPIO_Init(GPIOA, &PinConfig);
+	MCAL_GPIO_Init(GPIOB, &PinConfig);
 	
 	// Configure PIN2 as Output(push-pull)
 	PinConfig.GPIO_PinNumber = GPIO_PIN_2;
 	PinConfig.GPIO_PinMode = GPIO_MODE_OUTPUT_PP;
-	MCAL_GPIO_Init(GPIOA, &PinConfig);
+	MCAL_GPIO_Init(GPIOB, &PinConfig);
 	
 	// Configure PIN3 as Output(push-pull)
 	PinConfig.GPIO_PinNumber = GPIO_PIN_3;

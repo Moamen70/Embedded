@@ -32,16 +32,16 @@ typedef struct{
 /* =============== Macros Configuration References ================ */
 /* ================================================================ */
 
-#define GPIO_PIN_0		((uint8_t)00000001)
-#define GPIO_PIN_1		((uint8_t)00000010)
-#define GPIO_PIN_2		((uint8_t)00000100)
-#define GPIO_PIN_3		((uint8_t)00001000)
-#define GPIO_PIN_4		((uint8_t)00010000)
-#define GPIO_PIN_5		((uint8_t)00100000)
-#define GPIO_PIN_6		((uint8_t)01000000)
-#define GPIO_PIN_7		((uint8_t)10000000)
+#define GPIO_PIN_0		((uint8_t)0b00000001)
+#define GPIO_PIN_1		((uint8_t)0b00000010)
+#define GPIO_PIN_2		((uint8_t)0b00000100)
+#define GPIO_PIN_3		((uint8_t)0b00001000)
+#define GPIO_PIN_4		((uint8_t)0b00010000)
+#define GPIO_PIN_5		((uint8_t)0b00100000)
+#define GPIO_PIN_6		((uint8_t)0b01000000)
+#define GPIO_PIN_7		((uint8_t)0b10000000)
 
-#define GPIO_PORT		((uint8_t)11111111)
+#define GPIO_PORT		((uint8_t)0b11111111)
 
 /*
  *@ref GPIO_MODE_define

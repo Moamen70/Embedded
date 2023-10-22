@@ -7,13 +7,16 @@
 
 #include "lcd.h"
 
+
+
 void LCD_INIT(void)
 {
 	_delay_ms(20);
 	LCD_ISBUSY();
-	DataDir_LCD_CTRL |= ((1<<E_PIN)|(1<<RW_PIN)|(1<<RS_PIN)); // Set as output
+	//GPIO_init();
+	//DataDir_LCD_CTRL |= ((1<<E_PIN)|(1<<RW_PIN)|(1<<RS_PIN)); // Set as output
 	LCD_CTRL &= ~((1<<E_PIN)|(1<<RW_PIN)|(1<<RS_PIN)); // Clear
-	DataDir_LCD_PORT = 0xFF; // Set Port as Output
+	//DataDir_LCD_PORT = 0xFF; // Set Port as Output
 	_delay_ms(15);
 	LCD_CLEAR_SCREEN();
 	

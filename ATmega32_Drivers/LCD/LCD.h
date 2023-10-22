@@ -11,14 +11,17 @@
 
 #define F_CPU 1000000UL
 
-#include <avr/io.h>
+#include "ATmega32_Device_Header.h"
+#include "GPIO.h"
 #include <util/delay.h>
 
-#define LCD_PORT			PORTA
-#define DataDir_LCD_PORT	DDRA
 
-#define LCD_CTRL			PORTB
-#define DataDir_LCD_CTRL	DDRB
+
+#define LCD_PORT			GPIOA->PORT
+#define DataDir_LCD_PORT	GPIOA->DDR
+
+#define LCD_CTRL			GPIOB->PORT
+#define DataDir_LCD_CTRL	GPIOB->DDR
 
 #define RS_PIN				1
 #define	RW_PIN				2
