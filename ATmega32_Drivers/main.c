@@ -78,7 +78,7 @@ int main(void)
 	// Initialize the LCD
 	LCD_INIT();
 	
-	LCD_WRITE_STRING("Learn In Depth");
+	LCD_WRITE_STRING("Moamen Mohamed");
 	
     while (1) 
     {
