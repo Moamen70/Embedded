@@ -32,6 +32,10 @@
 #define GPIOC_Base			0x33
 #define GPIOD_Base			0x30
 
+#define SPI_Base			0x2D
+
+
+
 /* ================================================================ */
 /* ================= Peripheral Registers GPIO ==================== */
 /* ================================================================ */
@@ -42,6 +46,20 @@ typedef struct {
 	volatile uint8_t DDR;
 	volatile uint8_t PORT;
 }GPIO_Typedef_t;
+
+//GPIO REGISTERS====================
+typedef struct {
+	volatile uint8_t SPCR;
+	volatile uint8_t SPSR;
+	volatile uint8_t SPDR;
+}SPI_Typedef_t;
+
+////USART REGISTERS===================
+//typedef struct {
+	//volatile uint8_t PIN;
+	//volatile uint8_t DDR;
+	//volatile uint8_t PORT;
+//}USART_Typedef_t;
 
 /* ================================================================ */
 /* =================== Peripheral Instants  ======================= */
@@ -54,5 +72,13 @@ typedef struct {
 
 
 
+//////////////////////SOI///////////////////////////////////////
+#define SPI 				((SPI_Typedef_t *)(SPI_Base))
+
+////////////////////////help macros//////////////////////////
+#define SET_BIT(reg,bit)		reg |=  (1<<bit)
+#define CLEAR_BIT(reg,bit)		reg &= ~(1<<bit)
+#define TOGGLE_BIT(reg,bit)		reg ^=  (1<<bit)
+#define READ_BIT(reg,bit)		(reg>>bit) & 1
 
 #endif /* ATMEGA32_DEVICE_HEADER_H_ */
