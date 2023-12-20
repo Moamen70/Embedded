@@ -41,6 +41,12 @@ typedef enum
 
 typedef enum
 {
+	TimerMode = 0x00,
+	StopWatchMode = 0x01
+}Timer0_ALARM_MODE_t;
+
+typedef enum
+{
 	NO_CLK_SRC,
 	NO_PRESCALING,
 	PRESCALING_CLK8,
@@ -60,6 +66,7 @@ typedef struct
 	OCMIE0_t  ocmInterrupt;
 	TOVFIE0_t ovfInterrupt;
 	TIMER0_CLOCK_t clk;	
+	Timer0_ALARM_MODE_t alarm;
 	uint8_t Minutes;
 }STIMER0_CONFIG;
 
@@ -67,7 +74,9 @@ typedef struct
 *									APIS				                      *
 *******************************************************************************/
 E_STATUS_t TIMER0_Init(STIMER0_CONFIG* configuartion);
-E_STATUS_t TIMER0_Stop();
+E_STATUS_t TIMER0_Stop(void);
+E_STATUS_t TIMER0_Reset(void);
+E_STATUS_t TIMER0_Resume(void);
 
 E_STATUS_t TIMER0_GetCompareValue(ptr_uint8_t pu8_TicksNumber);
 E_STATUS_t TIMER0_SetCompareValue(uint8_t u8_TicksNumber);
@@ -81,6 +90,7 @@ E_STATUS_t TIMER0_SetOverflowValue(uint8_t u8_TicksNumber);
 void TIMER0_CALLBACK_Overflow_INTERRUPT(PTR_VoidFuncVoid_t callback);
 void TIMER0_CALLBACK_CompareMatch_INTERRUPT(PTR_VoidFuncVoid_t callback);
 
-void  SecondsFunctionCounter(void);
+void  SecondsFunctionCounter_Timer(void);
+void  SecondsFunctionCounter_StopWatch(void);
 
 #endif /* TIMERS_H_ */

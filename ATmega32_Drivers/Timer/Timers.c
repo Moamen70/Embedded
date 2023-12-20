@@ -65,15 +65,61 @@ E_STATUS_t TIMER0_Init(STIMER0_CONFIG* configuartion)
 			u8_Retval = E_NOK;
 		}
 	}
-	PORTB = TIMER0_Configurations->Minutes;
+	if (TimerMode ==TIMER0_Configurations->alarm )
+	{
+		DDRA = 0xFF; //Configure PORTA as output
+		DDRB = 0xFF; //Configure PORTB as output
+		DDRC &= ~(1<<0); //Configure PinC0 as input
+		PORTB = TIMER0_Configurations->Minutes;
+		u8_Retval = E_OK;
+	}
+	else
+	{
+		u8_Retval = E_NOK;
+	}
+	
+	if (StopWatchMode ==TIMER0_Configurations->alarm )
+	{
+		DDRA = 0xFF; //Configure PORTA as output
+		DDRB = 0xFF; //Configure PORTB as output
+		DDRC &= ~(1<<0); //Configure PinC0 as input	
+		PORTA = 0x00;
+		PORTB = 0x00;
+		u8_Retval = E_OK;
+	}
+	else
+	{
+		u8_Retval = E_NOK;
+	}
+	
 	
 	return u8_Retval;
 }
 
-E_STATUS_t TIMER0_Stop()
+E_STATUS_t TIMER0_Stop(void)
 {
 	E_STATUS_t u8_Retval = E_NOK;
-	TIMSK |= NO_CLK_SRC;
+	//TIMSK |= NO_CLK_SRC;
+	TCCR0 &= ~(0x07);
+	return u8_Retval;
+}
+
+E_STATUS_t TIMER0_Resume(void)
+{
+	E_STATUS_t u8_Retval = E_NOK;
+	//TIMSK |= NO_CLK_SRC;
+	TCCR0 |= TIMER0_Configurations->clk;
+	return u8_Retval;
+}
+
+E_STATUS_t TIMER0_Reset(void)
+{
+	E_STATUS_t u8_Retval = E_NOK;
+	TCCR0 = 0x00;
+	TCNT0 = 0x00;
+	OCR0 = 0x00;
+	TIMSK = 0x00;
+	TIFR = 0x00;
 	return u8_Retval;
 }
 
@@ -127,7 +173,7 @@ void TIMER0_CALLBACK_Overflow_INTERRUPT(PTR_VoidFuncVoid_t callback)
 }
 
 // function to calculate the seconds in timer mode
-void  SecondsFunctionCounter(void){
+void  SecondsFunctionCounter_Timer(void){
 	switch (PORTA) {
 		case 0x60:
 		PORTA= 0b01011001;
@@ -155,6 +201,37 @@ void  SecondsFunctionCounter(void){
 
 		default:
 		PORTA-=1;
+	}
+}
+
+void  SecondsFunctionCounter_StopWatch(void){
+	switch (PORTA) {
+		//case 0x59:
+		//PORTA= 0b00000000;
+		//break;
+		
+		case 0x49:
+		PORTA= 0b01010000;
+		break;
+
+		case 0x39:
+		PORTA= 0b01000000;
+		break;
+
+		case 0x29:
+		PORTA= 0b00110000;
+		break;
+		
+		case 0x19:
+		PORTA= 0b00100000;
+		break;
+		
+		case 0x9:
+		PORTA= 0b00010000;
+		break;
+
+		default:
+		PORTA+=1;
 	}
 }
 
